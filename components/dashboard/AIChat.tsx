@@ -114,7 +114,7 @@ export default function Home() {
     
     const components: Components = {
       code: ({ className, children, ...props }) => {
-        const match = /language-(\w+)/.exec(className || '');
+        //const match = /language-(\w+)/.exec(className || '');
         const isBlock = className?.includes('language-') || children?.toString().includes('\n');
 
         if (isBlock) {

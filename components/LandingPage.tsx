@@ -1,7 +1,6 @@
 "use client";
 
-import React, { ReactNode } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion} from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { Brain, Heart, MessageCircle, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
