@@ -13,6 +13,7 @@ const generationConfig = {
   maxOutputTokens: 8192,
   responseMimeType: "text/plain",
 };
+//Comment to add remote
 
 // Updated to store Content objects instead of strings
 interface ChatMessage {
