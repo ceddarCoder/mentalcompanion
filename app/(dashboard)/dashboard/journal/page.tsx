@@ -117,7 +117,6 @@ const JournalPage = () => {
 
 
 const handleCreate = async () => {
-  const router = useRouter();
 
   try {
     const response = await fetch('/api/journal', {
