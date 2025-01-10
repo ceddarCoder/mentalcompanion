@@ -3,13 +3,13 @@
 import React, { ReactNode } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
-import { Brain, Heart, MessageCircle, Shield, Sparkles, ArrowRight } from 'lucide-react';
+import { Brain, Heart, MessageCircle, Sparkles, ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
 
-const RootLayout = ({ children }: { children: ReactNode }) => {
-  return <AnimatePresence mode="wait">{children}</AnimatePresence>;
-};
+// const RootLayout = ({ children }: { children: ReactNode }) => {
+//   return <AnimatePresence mode="wait">{children}</AnimatePresence>;
+// };
 
 const LandingPage = () => {
   const router = useRouter();

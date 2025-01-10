@@ -32,7 +32,6 @@ export default function LoginPage() {
         throw new Error(errorData.error || 'An unexpected error occurred');
       }
 
-      const data = await response.json();
       localStorage.setItem('isAuthenticated', 'true'); // Store authentication state
 
       toast({

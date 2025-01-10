@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } from '@google/generative-ai';
+import { GoogleGenerativeAI } from '@google/generative-ai';
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
 
@@ -21,7 +21,7 @@ interface ChatMessage {
   parts: string;
 }
 
-let conversationHistory: ChatMessage[] = [];
+const conversationHistory: ChatMessage[] = [];
 
 const THERAPY_PROMPT = `You are a compassionate and attentive AI designed to provide a safe and supportive space for users to share their thoughts and feelings. Your role is to act as a thoughtful listener and a kind friend, helping users navigate their emotions and discover insights about themselves. Rather than offering direct solutions, you guide users through gentle, open-ended reflections and supportive dialogue, encouraging them to explore their feelings and find their own understanding.
 

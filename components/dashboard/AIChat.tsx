@@ -87,17 +87,18 @@ export default function Home() {
           ...newMessages,
           { 
             sender: 'Therapist', 
-            text: 'I apologize, but I\'m experiencing some technical difficulties. Let\'s take a pause and try again in a moment.',
+            text: 'I apologize, but I\'m experiencing some technical difficulties. Let&apos;s take a pause and try again in a moment.',
             timestamp: new Date()
           },
         ]);
       }
     } catch (error) {
+      console.log(error)
       setMessages([
         ...newMessages,
         { 
           sender: 'Therapist', 
-          text: 'I apologize, but I\'m experiencing some technical difficulties. Let\'s take a pause and try again in a moment.',
+          text: 'I apologize, but I&apos;m experiencing some technical difficulties. Let&apos;s take a pause and try again in a moment.',
           timestamp: new Date()
         },
       ]);

@@ -1,14 +1,10 @@
 "use client";
 import React from 'react';
-import { Search, AlertTriangle, CheckCircle, Info } from 'lucide-react';
+import { Search, AlertTriangle, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import {
-  Alert,
-  AlertDescription,
-  AlertTitle,
-} from '@/components/ui/alert';
+
 import {
   Table,
   TableBody,
@@ -17,13 +13,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+
 
 // New Analysis Component
 export const NewAnalysis = () => {

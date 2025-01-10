@@ -18,6 +18,7 @@ export const Settings = () => {
       setSuccess('Password updated successfully');
       setError('');
     } catch (err) {
+      console.log(err)
       setError('Failed to update password. Please try again.');
       setSuccess('');
     }
@@ -30,6 +31,7 @@ export const Settings = () => {
       setSuccess('Email updated successfully');
       setError('');
     } catch (err) {
+      console.log(err)
       setError('Failed to update email. Please try again.');
       setSuccess('');
     }

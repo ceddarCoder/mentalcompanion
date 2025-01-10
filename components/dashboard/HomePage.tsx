@@ -3,7 +3,7 @@
 import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Heart, Brain, Smile, TrendingUp, Calendar, MessageCircle } from 'lucide-react';
+import { Heart, Brain,Calendar, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const cardVariants = {
@@ -28,7 +28,7 @@ interface QuickActionProps {
   href: string;
 }
 
-const QuickAction: React.FC<QuickActionProps> = ({ icon, title, description, href }) => (
+const QuickAction: React.FC<QuickActionProps> = ({ icon, title, description }) => (
   <motion.div variants={cardVariants}>
     <Card className="hover:shadow-lg transition-shadow cursor-pointer bg-white/90">
       <CardHeader className="space-y-1">
