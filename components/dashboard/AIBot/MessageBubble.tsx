@@ -62,7 +62,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ text, isUser, timestamp }
         className={`rounded-2xl px-4 py-2 ${
           isUser
             ? 'bg-teal-500 text-white rounded-tr-none'
-            : 'bg-gray-100 text-gray-800 rounded-tl-none'
+            : 'bg-white text-gray-800 rounded-tl-none'
         }`}
       >
         {/* Use the same font and font weight for both user and model messages */}

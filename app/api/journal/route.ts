@@ -140,6 +140,9 @@ export async function GET() {
     try {
         await dbConnect(); // Ensure the connection is ready
         const db = mongoose.connection.db; // Access the database
+        if (!db) {
+            throw new Error('Database connection is not established');
+        }
         const collection = db.collection('journal-entries');
 
         const entries = await collection
@@ -162,6 +165,9 @@ export async function POST(req: NextRequest) {
 
         await dbConnect(); // Ensure the connection is ready
         const db = mongoose.connection.db; // Access the database
+        if (!db) {
+          throw new Error('Database connection is not established');
+        }
         const collection = db.collection('journal-entries');
 
         const newEntry = {
@@ -181,44 +187,54 @@ export async function POST(req: NextRequest) {
 
 // PUT (update) a journal entry
 export async function PUT(req: NextRequest) {
-    try {
-        const body = await req.json();
-        const { id, content, mood } = body;
+  try {
+    const { searchParams } = req.nextUrl;
+    const id = searchParams.get('id');
 
-        if (!id || !content || !mood) {
-            return NextResponse.json(
-                { error: 'ID, content, and mood are required' },
-                { status: 400 }
-            );
-        }
-
-        await dbConnect(); // Ensure the connection is ready
-        const db = mongoose.connection.db; // Access the database
-        const collection = db.collection('journal-entries');
-
-        const updateResult = await collection.updateOne(
-            { _id: new ObjectId(id) },
-            {
-                $set: {
-                    content,
-                    mood,
-                    updatedAt: new Date().toISOString(),
-                },
-            }
-        );
-
-        if (updateResult.matchedCount === 0) {
-            return NextResponse.json(
-                { message: 'Journal entry not found' },
-                { status: 404 }
-            );
-        }
-
-        return NextResponse.json({ message: 'Journal entry updated successfully' });
-    } catch (error) {
-        console.error('Error updating entry:', error);
-        return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required' }, { status: 400 });
     }
+
+    const body = await req.json();
+    const { content, mood } = body;
+
+    if (!content || !mood) {
+      return NextResponse.json(
+        { error: 'Content and mood are required' },
+        { status: 400 }
+      );
+    }
+
+    await dbConnect();
+    const database = mongoose.connection.db;
+    if (!database) {
+      throw new Error('Database connection is not established');
+  }
+    const collection = database.collection('journal-entries');
+
+    const updateResult = await collection.updateOne(
+      { _id: new ObjectId(id) },
+      {
+        $set: {
+          content,
+          mood,
+          updatedAt: new Date().toISOString(),
+        },
+      }
+    );
+
+    if (updateResult.matchedCount === 0) {
+      return NextResponse.json(
+        { message: 'Journal entry not found' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ message: 'Journal entry updated successfully' });
+  } catch (error) {
+    console.error('Error updating entry:', error);
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+  }
 }
 
 // DELETE a journal entry
@@ -233,6 +249,9 @@ export async function DELETE(req: NextRequest) {
 
         await dbConnect(); // Ensure the connection is ready
         const db = mongoose.connection.db; // Access the database
+        if (!db) {
+          throw new Error('Database connection is not established');
+      }
         const collection = db.collection('journal-entries');
 
         const deleteResult = await collection.deleteOne({
