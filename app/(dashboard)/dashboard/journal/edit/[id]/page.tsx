@@ -116,7 +116,7 @@ interface JournalEntry {
 export default function EditJournalPage() {
   const router = useRouter();
   const { id } = useParams();
-  const [isDialogOpen, setIsDialogOpen] = useState(true);
+  const [isDialogOpen] = useState(true);
   const [entry, setEntry] = useState<JournalEntry | null>(null);
 
   useEffect(() => {

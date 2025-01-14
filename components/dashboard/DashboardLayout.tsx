@@ -171,7 +171,6 @@ import React, { useState } from 'react'; // Import useState
 import { usePathname } from 'next/navigation'; // Import usePathname
 import { motion } from 'framer-motion';
 import Sidebar from './Sidebar';
-import { Button } from '@/components/ui/button';
 import { Home, MessageCircle, BookOpen, Menu, Settings, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';

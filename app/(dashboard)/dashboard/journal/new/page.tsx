@@ -78,7 +78,7 @@ import toast from 'react-hot-toast';
 
 export default function AddJournalPage() {
   const router = useRouter();
-  const [isDialogOpen, setIsDialogOpen] = useState(true);
+  const [isDialogOpen] = useState(true);
 
   const handleDialogSubmit = async (content: string, mood: string) => {
     try {

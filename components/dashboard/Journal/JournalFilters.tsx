@@ -1,6 +1,5 @@
 // components/JournalFilters.tsx
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 
 export const JournalFilters = ({ onSearch }: { onSearch: (query: string) => void }) => {
   return (
