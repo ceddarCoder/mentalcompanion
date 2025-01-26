@@ -1,4 +1,3 @@
-// components/auth/LoginForm.tsx
 "use client";
 
 import { useState } from 'react';
@@ -36,13 +35,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading = false }) => 
         transition={{ duration: 0.3 }}
         className="mb-6"
       >
-        <Link href="/" className="inline-flex items-center text-teal-600 hover:text-teal-700">
+        <Link href="/" className="inline-flex items-center text-primary hover:text-primary/90">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to home
         </Link>
       </motion.div>
 
-      <Card className="border-teal-100 shadow-lg">
+      <Card className="border-border shadow-lg">
         <CardHeader className="space-y-2 text-center pb-8">
           <motion.div
             initial={{ scale: 0 }}
@@ -50,10 +49,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading = false }) => 
             transition={{ duration: 0.3, delay: 0.2 }}
             className="flex justify-center mb-4"
           >
-            <Brain className="w-12 h-12 text-teal-600" />
+            <Brain className="w-12 h-12 text-primary" />
           </motion.div>
-          <CardTitle className="text-2xl font-bold text-gray-800">Welcome Back</CardTitle>
-          <CardDescription className="text-gray-600">
+          <CardTitle className="text-2xl font-bold text-foreground">Welcome Back</CardTitle>
+          <CardDescription className="text-muted-foreground">
             Continue your mental wellness journey
           </CardDescription>
         </CardHeader>
@@ -72,7 +71,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading = false }) => 
                 onChange={(e) => setUsername(e.target.value)}
                 disabled={isLoading}
                 required
-                className="w-full border-teal-200 focus:border-teal-400 focus:ring-teal-400"
+                className="w-full border-border focus:border-primary focus:ring-primary"
               />
             </motion.div>
             <motion.div
@@ -88,7 +87,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading = false }) => 
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isLoading}
                 required
-                className="w-full border-teal-200 focus:border-teal-400 focus:ring-teal-400"
+                className="w-full border-border focus:border-primary focus:ring-primary"
               />
             </motion.div>
             <motion.div
@@ -99,7 +98,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading = false }) => 
             >
               <Button
                 type="submit"
-                className="w-full bg-teal-600 hover:bg-teal-700 text-white"
+                className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                 disabled={isLoading}
               >
                 {isLoading ? "Signing in..." : "Sign In"}
@@ -108,13 +107,13 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLogin, isLoading = false }) => 
           </form>
         </CardContent>
         <CardFooter className="flex flex-col space-y-4 text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-muted-foreground">
             Don't have an account?{" "}
-            <Link href="/register" className="text-teal-600 hover:text-teal-700 font-medium">
+            <Link href="/register" className="text-primary hover:text-primary/90 font-medium">
               Sign up
             </Link>
           </p>
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-muted-foreground">
             Need immediate support? Call 988 for 24/7 crisis assistance
           </div>
         </CardFooter>
