@@ -3,8 +3,6 @@
 import { DragDropContext, Droppable, Draggable, DropResult } from "react-beautiful-dnd";
 import { JournalEntryCard } from './JournalEntryCard';
 import { JournalEntry } from '@/types/journal';
-import Image from 'next/image';
-
 interface JournalKanbanProps {
   entries: JournalEntry[];
   onEdit: (entry: JournalEntry) => void;

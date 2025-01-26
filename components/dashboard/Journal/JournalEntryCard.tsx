@@ -5,8 +5,6 @@ import { format } from 'date-fns';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from 'framer-motion';
-import Image from 'next/image';
-
 interface JournalEntry {
   _id: string;
   content: string;
