@@ -1,4 +1,3 @@
-// app/dashboard/journal/components/JournalEntryCard.tsx
 "use client";
 
 import { CalendarIcon, Pencil, Trash2, Smile, Meh, Frown, AlertCircle, Zap } from "lucide-react";
@@ -6,6 +5,7 @@ import { format } from 'date-fns';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 interface JournalEntry {
   _id: string;
@@ -22,14 +22,17 @@ interface JournalEntryCardProps {
 }
 
 const moodIcons = {
-  happy: <Smile className="h-5 w-5 text-yellow-500" />,
-  neutral: <Meh className="h-5 w-5 text-blue-500" />,
-  sad: <Frown className="h-5 w-5 text-gray-500" />,
-  anxious: <AlertCircle className="h-5 w-5 text-red-500" />,
-  excited: <Zap className="h-5 w-5 text-green-500" />,
+  happy: <Smile className="mood-icon text-yellow-500" />,
+  neutral: <Meh className="mood-icon text-blue-500" />,
+  sad: <Frown className="mood-icon text-gray-500" />,
+  anxious: <AlertCircle className="mood-icon text-red-500" />,
+  excited: <Zap className="mood-icon text-green-500" />,
 };
 
 export const JournalEntryCard = ({ entry, onEdit, onDelete }: JournalEntryCardProps) => {
+  // Extract the first line of the content
+  const firstLine = entry.content.split('\n')[0];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
@@ -37,19 +40,26 @@ export const JournalEntryCard = ({ entry, onEdit, onDelete }: JournalEntryCardPr
       transition={{ duration: 0.3 }}
       className="mb-4"
     >
-      <Card className="shadow-sm hover:shadow-md transition-shadow duration-300 rounded-lg">
+      <Card className="card max-w-80 h-48 relative">
+        
+
         <CardHeader>
-          <div className="flex justify-between items-center">
-            <CardTitle className="text-lg font-semibold text-gray-800">
-              <CalendarIcon className="inline mr-2 h-5 w-5 text-purple-500" />
-              {format(new Date(entry.createdAt), 'MMMM d, yyyy')}
-            </CardTitle>
-            <div className="space-x-2">
+          <div className="flex justify-between items-start">
+            <div>
+              <CardTitle className="text-lg font-semibold text-foreground">
+                <CalendarIcon className="inline mr-2 h-5 w-5 text-primary" />
+                {format(new Date(entry.createdAt), 'MMMM d, yyyy')}
+              </CardTitle>
+              <CardDescription className="text-sm text-muted-foreground flex items-center">
+                Mood: {moodIcons[entry.mood as keyof typeof moodIcons]} {entry.mood}
+              </CardDescription>
+            </div>
+            <div className="flex flex-col space-y-2">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => onEdit(entry)}
-                className="text-gray-600 hover:text-gray-800"
+                className="text-muted-foreground hover:text-foreground transition-transform hover:scale-110"
               >
                 <Pencil className="h-4 w-4" />
               </Button>
@@ -57,18 +67,15 @@ export const JournalEntryCard = ({ entry, onEdit, onDelete }: JournalEntryCardPr
                 variant="ghost"
                 size="icon"
                 onClick={() => onDelete(entry._id)}
-                className="text-red-500 hover:text-red-700"
+                className="text-destructive hover:text-destructive-foreground transition-transform hover:scale-110"
               >
                 <Trash2 className="h-4 w-4" />
               </Button>
             </div>
           </div>
-          <CardDescription className="text-sm text-gray-500 flex items-center">
-            Mood: {moodIcons[entry.mood as keyof typeof moodIcons]} {entry.mood}
-          </CardDescription>
         </CardHeader>
-        <CardContent>
-          <p className="whitespace-pre-wrap text-gray-700">{entry.content}</p>
+        <CardContent className="overflow-y-auto">
+          <p className="whitespace-pre-wrap text-foreground">{firstLine}</p>
         </CardContent>
       </Card>
     </motion.div>

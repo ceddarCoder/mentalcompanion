@@ -65,13 +65,13 @@ const MessageInput: React.FC<MessageInputProps> = ({ onSubmit, isLoading }) => {
             value={userMessage}
             onChange={(e) => setUserMessage(e.target.value)}
             placeholder="Express your thoughts..."
-            className="w-full rounded-full border border-gray-300 pl-4 pr-12 py-2 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-500/40"
+            className="w-full rounded-full border border-border pl-4 pr-12 py-2 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/40"
             disabled={isLoading}
           />
           <button
             type="submit"
             disabled={isLoading || !userMessage.trim()}
-            className="absolute right-2 top-1/2 transform -translate-y-1/2 rounded-full bg-teal-500 p-2 text-white transition-colors hover:bg-teal-600 disabled:bg-teal-300"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 rounded-full bg-primary p-2 text-primary-foreground transition-colors hover:bg-primary/90 disabled:bg-primary/50"
           >
             {isLoading ? (
               <Loader2 className="h-5 w-5 animate-spin" />

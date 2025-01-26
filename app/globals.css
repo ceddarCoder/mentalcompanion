@@ -1,54 +1,117 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap');
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --background: 30 60% 95%; /* F7DCB9 */
+    --foreground: 25 50% 20%; /* 914F1E */
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 25 50% 20%; /* 914F1E */
+    --popover: 0 0% 100%; /* White */
+    --popover-foreground: 25 50% 20%; /* 914F1E */
+    --primary: 25 50% 40%; /* 914F1E */
+    --primary-foreground: 0 0% 100%; /* White */
+    --secondary: 30 60% 80%; /* DEAC80 */
+    --secondary-foreground: 25 50% 20%; /* 914F1E */
+    --muted: 30 60% 90%; /* F7DCB9 */
+    --muted-foreground: 25 50% 40%; /* 914F1E */
+    --accent: 80 40% 70%; /* B5C18E */
+    --accent-foreground: 25 50% 20%; /* 914F1E */
+    --destructive: 0 84% 60%; /* Red */
+    --destructive-foreground: 0 0% 100%; /* White */
+    --border: 30 60% 80%; /* DEAC80 */
+    --input: 30 60% 80%; /* DEAC80 */
+    --ring: 25 50% 40%; /* 914F1E */
+    --radius: 1rem; /* Rounded corners */
   }
- 
+
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
+    --background: 25 50% 10%; /* Dark brown */
+    --foreground: 30 60% 90%; /* Light beige */
+    --card: 25 50% 15%; /* Darker brown */
+    --card-foreground: 30 60% 90%; /* Light beige */
+    --popover: 25 50% 15%; /* Darker brown */
+    --popover-foreground: 30 60% 90%; /* Light beige */
+    --primary: 25 50% 40%; /* 914F1E */
+    --primary-foreground: 0 0% 100%; /* White */
+    --secondary: 30 60% 80%; /* DEAC80 */
+    --secondary-foreground: 25 50% 20%; /* 914F1E */
+    --muted: 25 50% 25%; /* Dark muted */
+    --muted-foreground: 30 60% 60%; /* Light beige */
+    --accent: 80 40% 70%; /* B5C18E */
+    --accent-foreground: 25 50% 20%; /* 914F1E */
+    --destructive: 0 62% 30%; /* Dark red */
+    --destructive-foreground: 0 0% 90%; /* Light gray */
+    --border: 25 50% 25%; /* Dark brown */
+    --input: 25 50% 25%; /* Dark brown */
+    --ring: 25 50% 40%; /* 914F1E */
   }
 }
 
+/* Apply global styles */
+body {
+  font-family: 'Nunito', sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+/* Card Styles */
+.card {
+  background-color: hsl(var(--card));
+  border-radius: var(--radius);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Button Styles */
+.button {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border-radius: var(--radius);
+  padding: 8px 16px;
+  transition: background-color 0.2s ease;
+}
+
+.button:hover {
+  background-color: hsl(var(--accent));
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-switch button {
+  background-color: hsl(var(--muted));
+  color: hsl(var(--muted-foreground));
+  border-radius: var(--radius);
+  padding: 8px 16px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.toggle-switch button.active {
+  background-color: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+}
+
+/* Mood Icons */
+.mood-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+/* Border Styles */
 @layer base {
   * {
     @apply border-border;

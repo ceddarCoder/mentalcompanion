@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Card, 
@@ -110,8 +110,8 @@ const WellnessCheck = () => {
                 variant={responses[question.id] === emoji ? "default" : "ghost"}
                 className={`text-3xl rounded-full w-16 h-16 ${
                   responses[question.id] === emoji 
-                    ? 'bg-teal-100 hover:bg-teal-200' 
-                    : 'hover:bg-teal-50'
+                    ? 'bg-primary/10 hover:bg-primary/20' 
+                    : 'hover:bg-primary/10'
                 }`}
                 onClick={() => handleResponse(question.id, emoji)}
               >
@@ -131,7 +131,7 @@ const WellnessCheck = () => {
               step={1}
               className="w-full"
             />
-            <div className="flex justify-between text-sm text-teal-600">
+            <div className="flex justify-between text-sm text-primary">
               <span>Low</span>
               <span>High</span>
             </div>
@@ -144,7 +144,7 @@ const WellnessCheck = () => {
             onValueChange={(value) => handleResponse(question.id, value)}
             value={responses[question.id]}
           >
-            <SelectTrigger className="border-teal-200 focus:ring-teal-200">
+            <SelectTrigger className="border-border focus:ring-primary">
               <SelectValue placeholder="Select an option" />
             </SelectTrigger>
             <SelectContent>
@@ -163,27 +163,27 @@ const WellnessCheck = () => {
     switch (level) {
       case 'High':
         return {
-          bg: 'bg-red-50',
-          text: 'text-red-700',
-          icon: 'text-red-500'
+          bg: 'bg-destructive/10',
+          text: 'text-destructive',
+          icon: 'text-destructive'
         };
       case 'Medium':
         return {
-          bg: 'bg-yellow-50',
-          text: 'text-yellow-700',
-          icon: 'text-yellow-500'
+          bg: 'bg-warning/10',
+          text: 'text-warning',
+          icon: 'text-warning'
         };
       case 'Low':
         return {
-          bg: 'bg-green-50',
-          text: 'text-green-700',
-          icon: 'text-green-500'
+          bg: 'bg-success/10',
+          text: 'text-success',
+          icon: 'text-success'
         };
       default:
         return {
-          bg: 'bg-teal-50',
-          text: 'text-teal-700',
-          icon: 'text-teal-500'
+          bg: 'bg-primary/10',
+          text: 'text-primary',
+          icon: 'text-primary'
         };
     }
   };
@@ -192,27 +192,27 @@ const WellnessCheck = () => {
     switch (level) {
       case 'High':
         return {
-          bg: 'bg-purple-50',
-          text: 'text-purple-700',
-          icon: 'text-purple-500'
+          bg: 'bg-secondary/10',
+          text: 'text-secondary',
+          icon: 'text-secondary'
         };
       case 'Good':
         return {
-          bg: 'bg-blue-50',
-          text: 'text-blue-700',
-          icon: 'text-blue-500'
+          bg: 'bg-accent/10',
+          text: 'text-accent',
+          icon: 'text-accent'
         };
       case 'Low':
         return {
-          bg: 'bg-orange-50',
-          text: 'text-orange-700',
-          icon: 'text-orange-500'
+          bg: 'bg-warning/10',
+          text: 'text-warning',
+          icon: 'text-warning'
         };
       default:
         return {
-          bg: 'bg-teal-50',
-          text: 'text-teal-700',
-          icon: 'text-teal-500'
+          bg: 'bg-primary/10',
+          text: 'text-primary',
+          icon: 'text-primary'
         };
     }
   };
@@ -221,21 +221,21 @@ const WellnessCheck = () => {
     switch (status) {
       case 'Stable':
         return {
-          bg: 'bg-emerald-50',
-          text: 'text-emerald-700',
-          icon: 'text-emerald-500'
+          bg: 'bg-success/10',
+          text: 'text-success',
+          icon: 'text-success'
         };
       case 'Needs Attention':
         return {
-          bg: 'bg-amber-50',
-          text: 'text-amber-700',
-          icon: 'text-amber-500'
+          bg: 'bg-warning/10',
+          text: 'text-warning',
+          icon: 'text-warning'
         };
       default:
         return {
-          bg: 'bg-teal-50',
-          text: 'text-teal-700',
-          icon: 'text-teal-500'
+          bg: 'bg-primary/10',
+          text: 'text-primary',
+          icon: 'text-primary'
         };
     }
   };
@@ -247,19 +247,19 @@ const WellnessCheck = () => {
 
     return (
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-        <Card className="bg-white">
+        <Card className="bg-card">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-teal-900">Your Wellness Report</CardTitle>
-                <CardDescription className="text-teal-600">Analysis based on your responses</CardDescription>
+                <CardTitle className="text-foreground">Your Wellness Report</CardTitle>
+                <CardDescription className="text-muted-foreground">Analysis based on your responses</CardDescription>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" size="sm" className="border-teal-200 text-teal-700 hover:bg-teal-50">
+                <Button variant="outline" size="sm" className="border-border text-foreground hover:bg-primary/10">
                   <Download className="w-4 h-4 mr-2" />
                   Save Report
                 </Button>
-                <Button variant="outline" size="sm" className="border-teal-200 text-teal-700 hover:bg-teal-50">
+                <Button variant="outline" size="sm" className="border-border text-foreground hover:bg-primary/10">
                   <Share2 className="w-4 h-4 mr-2" />
                   Share
                 </Button>
@@ -268,11 +268,11 @@ const WellnessCheck = () => {
           </CardHeader>
           <CardContent className="space-y-6">
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-teal-900">Current Mood Analysis</h3>
+              <h3 className="text-lg font-semibold text-foreground">Current Mood Analysis</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Card className={stressColors.bg}>
                   <CardHeader className="p-4">
-                    <CardTitle className="text-sm text-teal-900">Stress Level</CardTitle>
+                    <CardTitle className="text-sm text-foreground">Stress Level</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between">
@@ -283,7 +283,7 @@ const WellnessCheck = () => {
                 </Card>
                 <Card className={energyColors.bg}>
                   <CardHeader className="p-4">
-                    <CardTitle className="text-sm text-teal-900">Energy Level</CardTitle>
+                    <CardTitle className="text-sm text-foreground">Energy Level</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between">
@@ -294,7 +294,7 @@ const WellnessCheck = () => {
                 </Card>
                 <Card className={wellnessColors.bg}>
                   <CardHeader className="p-4">
-                    <CardTitle className="text-sm text-teal-900">Overall Wellness</CardTitle>
+                    <CardTitle className="text-sm text-foreground">Overall Wellness</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="flex items-center justify-between">
@@ -307,11 +307,11 @@ const WellnessCheck = () => {
             </div>
 
             <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-teal-900">AI Insights</h3>
-              <Alert className="bg-white border-teal-200">
-                <Brain className="h-4 w-4 text-teal-600" />
-                <AlertTitle className="text-teal-900">Personalized Recommendations</AlertTitle>
-                <AlertDescription className="text-teal-700">
+              <h3 className="text-lg font-semibold text-foreground">AI Insights</h3>
+              <Alert className="bg-card border-border">
+                <Brain className="h-4 w-4 text-primary" />
+                <AlertTitle className="text-foreground">Personalized Recommendations</AlertTitle>
+                <AlertDescription className="text-muted-foreground">
                   Based on your responses, consider these activities:
                   <ul className="list-disc list-inside mt-2">
                     <li>Morning meditation (10-15 minutes)</li>
@@ -331,20 +331,20 @@ const WellnessCheck = () => {
   return (
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <div className="space-y-2">
-        <div className="flex justify-between text-sm text-teal-600">
+        <div className="flex justify-between text-sm text-primary">
           <span>Question {currentStep} of {questions.length}</span>
           <span>{Math.round((currentStep / questions.length) * 100)}% Complete</span>
         </div>
         <Progress 
           value={(currentStep / questions.length) * 100} 
-          className="bg-teal-100"
+          className="bg-primary/10"
         />
       </div>
 
-      <Card className="bg-white">
+      <Card className="bg-card">
         <CardHeader>
-          <CardTitle className="text-teal-900">{questions[currentStep - 1].text}</CardTitle>
-          <CardDescription className="text-teal-600">Answer honestly for better support.</CardDescription>
+          <CardTitle className="text-foreground">{questions[currentStep - 1].text}</CardTitle>
+          <CardDescription className="text-muted-foreground">Answer honestly for better support.</CardDescription>
         </CardHeader>
         <CardContent>{renderQuestion(questions[currentStep - 1])}</CardContent>
         <CardFooter className="justify-between">
@@ -352,14 +352,14 @@ const WellnessCheck = () => {
             variant="ghost" 
             onClick={() => currentStep > 1 && setCurrentStep(currentStep - 1)} 
             disabled={currentStep === 1}
-            className="text-teal-700 hover:bg-teal-50"
+            className="text-foreground hover:bg-primary/10"
           >
             Back
           </Button>
           <Button 
             onClick={handleNext} 
             disabled={!responses[questions[currentStep - 1].id]}
-            className="bg-teal-600 hover:bg-teal-700"
+            className="bg-primary text-primary-foreground hover:bg-primary/90"
           >
             {currentStep === questions.length ? 'Complete' : 'Next'}
             <ArrowRight className="ml-2 w-4 h-4" />
@@ -368,14 +368,14 @@ const WellnessCheck = () => {
       </Card>
 
       {isAssessing && (
-        <div className="fixed inset-0 bg-teal-900/20 backdrop-blur-sm flex items-center justify-center">
-          <Card className="w-[300px] bg-white">
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center">
+          <Card className="w-[300px] bg-card">
             <CardHeader>
-              <CardTitle className="text-center text-teal-900">Analyzing Responses</CardTitle>
+              <CardTitle className="text-center text-foreground">Analyzing Responses</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex justify-center">
-                <Brain className="w-8 h-8 animate-pulse text-teal-600" />
+                <Brain className="w-8 h-8 animate-pulse text-primary" />
               </div>
             </CardContent>
           </Card>

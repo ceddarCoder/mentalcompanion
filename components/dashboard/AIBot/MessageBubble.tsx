@@ -23,8 +23,8 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ text, isUser, timestamp }
 
       if (isBlock) {
         return (
-          <div className="bg-gray-100 rounded-md p-3 my-2">
-            <code className="text-gray-800 text-sm font-mono" {...props}>
+          <div className="bg-muted rounded-md p-3 my-2">
+            <code className="text-foreground text-sm font-mono" {...props}>
               {children}
             </code>
           </div>
@@ -32,7 +32,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ text, isUser, timestamp }
       }
 
       return (
-        <code className="bg-gray-100 text-gray-800 px-1 py-0.5 rounded" {...props}>
+        <code className="bg-muted text-foreground px-1 py-0.5 rounded" {...props}>
           {children}
         </code>
       );
@@ -42,7 +42,7 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ text, isUser, timestamp }
     a: ({ children, href }) => (
       <a
         href={href}
-        className="text-teal-600 hover:text-teal-700 underline"
+        className="text-primary hover:text-primary/90 underline"
         target="_blank"
         rel="noopener noreferrer"
       >
@@ -52,21 +52,20 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({ text, isUser, timestamp }
     h1: ({ children }) => <h1 className="text-xl font-bold my-2">{children}</h1>,
     h2: ({ children }) => <h2 className="text-lg font-bold my-2">{children}</h2>,
     h3: ({ children }) => <h3 className="text-base font-bold my-1">{children}</h3>,
-    p: ({ children }) => <p className="my-1">{children}</p>, // Ensure consistent paragraph styling
+    p: ({ children }) => <p className="my-1">{children}</p>,
   };
 
   return (
     <div className={`flex flex-col ${isUser ? 'items-end' : 'items-start'} max-w-[85%]`}>
-      <span className="text-xs text-gray-500 mb-1 px-2">{formatTimestamp(timestamp)}</span>
+      <span className="text-xs text-muted-foreground mb-1 px-2">{formatTimestamp(timestamp)}</span>
       <div
         className={`rounded-2xl px-4 py-2 ${
           isUser
-            ? 'bg-teal-500 text-white rounded-tr-none'
-            : 'bg-white text-gray-800 rounded-tl-none'
+            ? 'bg-primary text-primary-foreground rounded-tr-none'
+            : 'bg-card text-foreground rounded-tl-none'
         }`}
       >
-        {/* Use the same font and font weight for both user and model messages */}
-        <div className="font-sans text-base font-normal"> {/* Explicitly set font-normal */}
+        <div className="font-sans text-base font-normal">
           {isUser ? (
             <p className="whitespace-pre-wrap">{text}</p>
           ) : (
