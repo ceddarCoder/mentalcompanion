@@ -71,18 +71,18 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
 
       {/* Main Content */}
       <div
-        className={cn(
-          "flex-1 min-w-0", // Add min-w-0 to prevent flex child from expanding beyond parent
-          "lg:w-[calc(100%-16rem)]",
-          {
-            "lg:w-[calc(100%-4rem)]": isSidebarCollapsed,
-          }
-        )}
-      >
-        <main className="w-full h-full px-4 lg:px-6 py-4 overflow-x-hidden">
-          {children}
-        </main>
-      </div>
+  className={cn(
+    "flex-1 min-w-0",
+    "lg:ml-64", // Default margin for expanded sidebar
+    {
+      "lg:ml-16": isSidebarCollapsed, // Collapsed margin
+    }
+  )}
+>
+  <main className="w-full h-full px-4 lg:px-6 py-4 overflow-x-auto ">
+    {children}
+  </main>
+</div>
 
       {/* FAB Menu - Visible only on mobile */}
       <div className="fixed bottom-20 right-6 z-50 lg:hidden">

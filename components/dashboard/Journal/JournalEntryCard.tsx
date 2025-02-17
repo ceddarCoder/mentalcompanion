@@ -38,7 +38,7 @@ export const JournalEntryCard = ({ entry, onEdit, onDelete }: JournalEntryCardPr
       transition={{ duration: 0.3 }}
       className="mb-4"
     >
-      <Card className="card max-w-80 h-48 relative">
+      <Card className="card max-w-full lg:max-w-[245px] h-auto relative">
         
 
         <CardHeader>

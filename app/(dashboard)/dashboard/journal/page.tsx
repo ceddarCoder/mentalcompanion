@@ -21,7 +21,20 @@ export default function JournalPage() {
   const [entries, setEntries] = useState<JournalEntry[]>([]);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingEntry, setEditingEntry] = useState<JournalEntry | null>(null);
-  const [view, setView] = useState<'kanban' | 'timeline'>('kanban');
+  const [view, setView] = useState<'kanban' | 'timeline'>('timeline');
+  const [isWideScreen, setIsWideScreen] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const wideScreen = window.innerWidth >= 1024;
+      setIsWideScreen(wideScreen);
+      setView(wideScreen ? 'kanban' : 'timeline');
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     fetchEntries();
@@ -72,13 +85,8 @@ export default function JournalPage() {
 
       const response = await fetch(url, {
         method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          content,
-          mood,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content, mood }),
       });
 
       if (response.ok) {
@@ -98,11 +106,7 @@ export default function JournalPage() {
     const { destination, source, draggableId } = result;
 
     if (!destination) return;
-
-    if (
-      destination.droppableId === source.droppableId &&
-      destination.index === source.index
-    ) {
+    if (destination.droppableId === source.droppableId && destination.index === source.index) {
       return;
     }
 
@@ -121,18 +125,11 @@ export default function JournalPage() {
     try {
       const response = await fetch(`/api/journal?id=${entry._id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          content: entry.content,
-          mood: entry.mood,
-        }),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ content: entry.content, mood: entry.mood }),
       });
 
-      if (!response.ok) {
-        throw new Error('Failed to update entry mood.');
-      }
+      if (!response.ok) throw new Error('Failed to update entry mood.');
     } catch (error) {
       console.error('Error updating entry mood:', error);
       toast.error('Failed to update entry mood.');
@@ -142,46 +139,40 @@ export default function JournalPage() {
   return (
     <div className="min-h-screen bg-background text-foreground py-6">
       <div className="container mx-auto px-4 max-w-7xl">
-        {/* Header with better spacing */}
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-          <div className="flex items-center space-x-3">
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2">
-              <span className="text-primary">📔</span>
-              <span className="bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
-                My Journal
-              </span>
-            </h1>
-          </div>
-          <div className="flex items-center gap-3 w-full sm:w-auto">
-            <ViewToggle view={view} setView={setView} />
-            <Button
-              variant="default"
-              onClick={handleCreate}
-              className="ml-auto sm:ml-0 px-4 py-2 h-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/30 transition-all"
-            >
-              <span className="mr-2">✨</span>
-              New Entry
-            </Button>
-          </div>
+        {/* Header Row */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2">
+            <span className="text-primary">📔</span>
+            <span className="bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+              My Journal
+            </span>
+          </h1>
+          <Button
+            variant="default"
+            onClick={handleCreate}
+            className="px-4 py-2 h-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/30 transition-all justify-end"
+          >
+            <span className="mr-2">✨</span>
+            New Entry
+          </Button>
         </div>
 
-        {/* Main content area with constrained width */}
-        <div className="mt-6 mx-auto">
-          {view === 'kanban' ? (
-            <JournalKanban
-              entries={entries}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              onDragEnd={onDragEnd}
-            />
+        {/* View Toggle Button (Separate Row) */}
+        {isWideScreen && (
+          <div className="flex justify-start pt-3">
+            <ViewToggle view={view} setView={setView} />
+          </div>
+        )}
+
+        {/* Main Content */}
+        <div className="mt-3 mx-auto translate-x-[-1rem]">
+          {view === 'kanban' && isWideScreen ? (
+            <JournalKanban entries={entries} onEdit={handleEdit} onDelete={handleDelete} onDragEnd={onDragEnd} />
           ) : (
-            <JournalTimeline
-              entries={entries}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
+            <JournalTimeline entries={entries} onEdit={handleEdit} onDelete={handleDelete} />
           )}
         </div>
+        
 
         <JournalDialog
           isOpen={isDialogOpen}

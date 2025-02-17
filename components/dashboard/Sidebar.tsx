@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ onSignOut, isCollapsed, toggleSidebar
   const pathname = usePathname();
   
   return (
-    <div className="relative h-screen">
+    <div className="fixed h-screen left-0 top-0">
       {/* Sidebar Content */}
       <div
         className={cn(
@@ -162,3 +162,5 @@ const Sidebar: React.FC<SidebarProps> = ({ onSignOut, isCollapsed, toggleSidebar
 };
 
 export default Sidebar;
+
+
