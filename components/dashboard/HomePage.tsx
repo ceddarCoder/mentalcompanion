@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Heart, Brain, Calendar, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 const cardVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -28,23 +29,30 @@ interface QuickActionProps {
   href: string;
 }
 
-const QuickAction: React.FC<QuickActionProps> = ({ icon, title, description }) => (
-  <motion.div variants={cardVariants}>
-    <Card className="hover:shadow-lg transition-shadow cursor-pointer bg-card/90">
-      <CardHeader className="space-y-1">
-        <div className="flex items-center space-x-4">
-          <div className="p-2 bg-muted rounded-lg">
-            {icon}
+const QuickAction: React.FC<QuickActionProps> = ({ icon, title, description, href }) => {
+  const router = useRouter();
+
+  return (
+    <motion.div variants={cardVariants}>
+      <Card
+        className="hover:shadow-lg transition-shadow cursor-pointer bg-card/90"
+        onClick={() => router.push(href)}
+      >
+        <CardHeader className="space-y-1">
+          <div className="flex items-center space-x-4">
+            <div className="p-2 bg-muted rounded-lg">
+              {icon}
+            </div>
+            <div>
+              <CardTitle className="text-lg text-foreground">{title}</CardTitle>
+              <CardDescription className="text-muted-foreground">{description}</CardDescription>
+            </div>
           </div>
-          <div>
-            <CardTitle className="text-lg text-foreground">{title}</CardTitle>
-            <CardDescription className="text-muted-foreground">{description}</CardDescription>
-          </div>
-        </div>
-      </CardHeader>
-    </Card>
-  </motion.div>
-);
+        </CardHeader>
+      </Card>
+    </motion.div>
+  );
+};
 
 const quickActions: QuickActionProps[] = [
   {
@@ -69,10 +77,14 @@ const quickActions: QuickActionProps[] = [
 
 const HomePage = () => {
   const [userName, setUserName] = useState<string | null>(null);
+  const [selectedMood, setSelectedMood] = useState<string | null>(null);
+  const router = useRouter();
+
   const currentHour = new Date().getHours();
   let greeting = "Good morning";
   if (currentHour >= 12 && currentHour < 17) greeting = "Good afternoon";
   else if (currentHour >= 17) greeting = "Good evening";
+
   useEffect(() => {
     // Retrieve the user's name from localStorage
     const storedUserName = localStorage.getItem('userName');
@@ -80,6 +92,20 @@ const HomePage = () => {
       setUserName(storedUserName);
     }
   }, []);
+
+  const handleMoodSelection = (mood: string) => {
+    setSelectedMood(mood);
+    // Save the selected mood to local storage or send it to the backend
+    localStorage.setItem('selectedMood', mood);
+  };
+
+  const handleCrisisResources = () => {
+    router.push('/resources');
+  };
+
+  const handleAIChat = () => {
+    router.push('/dashboard/chat');
+  };
 
   return (
     <div className="p-8 max-w-7xl mx-auto space-y-8 bg-background">
@@ -98,8 +124,11 @@ const HomePage = () => {
             {["😊", "😐", "😢", "😫", "😡"].map((emoji) => (
               <Button
                 key={emoji}
-                variant="ghost"
-                className="text-3xl hover:bg-muted rounded-full w-16 h-16"
+                variant={selectedMood === emoji ? "default" : "ghost"}
+                className={`text-3xl rounded-full w-16 h-16 ${
+                  selectedMood === emoji ? 'bg-primary/10 hover:bg-primary/20' : 'hover:bg-muted'
+                }`}
+                onClick={() => handleMoodSelection(emoji)}
               >
                 {emoji}
               </Button>
@@ -168,8 +197,14 @@ const HomePage = () => {
         </CardHeader>
         <CardContent>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button className="flex-1 bg-primary hover:bg-primary/90">Talk to AI Companion</Button>
-            <Button variant="outline" className="flex-1 border-border text-foreground hover:bg-muted">
+            <Button className="flex-1 bg-primary hover:bg-primary/90" onClick={handleAIChat}>
+              Talk to AI Companion
+            </Button>
+            <Button
+              variant="outline"
+              className="flex-1 border-border text-foreground hover:bg-muted"
+              onClick={handleCrisisResources}
+            >
               Crisis Resources
             </Button>
           </div>

@@ -140,53 +140,57 @@ export default function JournalPage() {
   };
 
   return (
-<div className="min-h-screen bg-background text-foreground py-8">
-  <div className="container mx-auto px-4">
-    {/* Header with Illustration */}
-    <div className="flex justify-between items-center mb-8">
-      <div className="flex items-center space-x-4">
-        
-        <h1 className="text-3xl font-bold">📔 My Journal</h1>
+    <div className="min-h-screen bg-background text-foreground py-6">
+      <div className="container mx-auto px-4 max-w-7xl">
+        {/* Header with better spacing */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+          <div className="flex items-center space-x-3">
+            <h1 className="text-2xl sm:text-3xl font-bold tracking-tight flex items-center gap-2">
+              <span className="text-primary">📔</span>
+              <span className="bg-gradient-to-r from-foreground to-primary bg-clip-text text-transparent">
+                My Journal
+              </span>
+            </h1>
+          </div>
+          <div className="flex items-center gap-3 w-full sm:w-auto">
+            <ViewToggle view={view} setView={setView} />
+            <Button
+              variant="default"
+              onClick={handleCreate}
+              className="ml-auto sm:ml-0 px-4 py-2 h-auto bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-primary/30 transition-all"
+            >
+              <span className="mr-2">✨</span>
+              New Entry
+            </Button>
+          </div>
+        </div>
+
+        {/* Main content area with constrained width */}
+        <div className="mt-6 mx-auto">
+          {view === 'kanban' ? (
+            <JournalKanban
+              entries={entries}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              onDragEnd={onDragEnd}
+            />
+          ) : (
+            <JournalTimeline
+              entries={entries}
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          )}
+        </div>
+
+        <JournalDialog
+          isOpen={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          onSubmit={handleDialogSubmit}
+          initialContent={editingEntry?.content}
+          initialMood={editingEntry?.mood}
+        />
       </div>
-      <Button
-        variant="default"
-        onClick={handleCreate}
-        className="bg-primary text-primary-foreground hover:bg-accent transition-transform hover:scale-105"
-      >
-        ✨ New Entry
-      </Button>
     </div>
-
-    {/* View Toggle */}
-    <ViewToggle view={view} setView={setView} />
-
-    {/* Kanban or Timeline View */}
-    <div className="mt-6">
-      {view === 'kanban' ? (
-        <JournalKanban
-          entries={entries}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-          onDragEnd={onDragEnd}
-        />
-      ) : (
-        <JournalTimeline
-          entries={entries}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-        />
-      )}
-    </div>
-
-    {/* Journal Dialog */}
-    <JournalDialog
-      isOpen={isDialogOpen}
-      onClose={() => setIsDialogOpen(false)}
-      onSubmit={handleDialogSubmit}
-      initialContent={editingEntry?.content}
-      initialMood={editingEntry?.mood}
-    />
-  </div>
-</div>
   );
 }
